@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import Highlight from "./Highlight";
 import Footer from "../../components/Footer"
+import styles from "./styles.module.css"
 import img1 from "../../assets/Dishonored_capa.png"
 import img2 from "../../assets/TW3_Wild_Hunt.png"
 import img3 from "../../assets/Grand_Theft_Auto_V_capa.png"
@@ -67,6 +68,16 @@ export default function Home() {
         gameDuration="Duration (main history): 10 hours"
         gameDescription="Cuphead é um jogo de ação e tiros clássico, com enorme ênfase nas batalhas de chefes. Inspirado nas animações infantis da década de 1930, os visuais e efeitos sonoros foram minuciosamente recriados com as mesmíssimas técnicas dessa era, com destaque para desenhos feitos à mão, fundos em aquarela e gravações originais de jazz. Jogue como Cuphead ou Mugman (nos modos um só jogador ou cooperativo) e atravesse mundos estranhos, adquira novas armas, aprenda supergolpes potentes e descubra segredos ocultos, tudo isso enquanto tenta pagar a dívida que você fez com o diabo!"
       />
+      <section className={styles.about}>
+        <h2>Sobre o projeto</h2>
+        <p>
+          O Checkpoint é um espaço onde amantes de jogos podem compartilhar suas
+          experiências! O objetivo é criar uma comunidade vibrante onde os
+          jogadores possam registrar e discutir suas jornadas em diferentes jogos.
+          Aqui, você pode contar o que achou do jogo, destacar os momentos que
+          mais gostou, compartilhar seu tempo de conclusão e muito mais. 
+        </p>
+      </section>
       <Footer scrollToTop={scrollToTop}/>
     </>
   )
