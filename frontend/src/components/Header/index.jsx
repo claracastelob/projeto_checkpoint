@@ -5,7 +5,7 @@ export default function Header() {
     <div className={styles.header}>
       <h1>Checkpoint</h1>
       <nav className={styles.nav}>
-        <a href="" className={styles.navLink}>Create Account</a>
+        <a href="/createAccount" className={styles.navLink}>Create Account</a>
         <a href="/login" className={styles.navLink}>Login</a>
         <a href="" className={styles.navLink}>About</a>
       </nav>
