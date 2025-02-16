@@ -19,11 +19,15 @@ const images = {
   "Zelda: Ocarina of Time": zelda,
 }
 
-export default function GameCard({name, img}) {
+export default function GameCard({name, img, rating}) {
   return(
     <div className={styles.gamecard}>
       <img src={images[name]} alt="" />
       <p>{name}</p>
+      <p>Time of Conclusion: </p>
+      <div className={styles.stars}>
+        {"★".repeat(rating)}{"☆".repeat(5 - rating)}
+      </div>
     </div>
   )
 }

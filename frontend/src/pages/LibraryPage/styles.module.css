@@ -20,6 +20,29 @@ body {
   align-items: center;
 }
 
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+  padding-right: 5rem;
+  padding-left: 5rem;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prevBtn, .nextBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #f2eddc;
+  cursor: pointer;
+}
+
 .newGameButton {
   background-color: #663add;
   color: #f2eddc;
@@ -32,11 +55,3 @@ body {
 .newGameButton:hover {
   background-color: #421aaf;
 }
-
-.gameGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  margin-top: 20px;
-}
-
