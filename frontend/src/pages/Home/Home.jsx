@@ -2,13 +2,13 @@ import Header from "../../components/Header";
 import Highlight from "./Highlight";
 import Footer from "../../components/Footer"
 import styles from "./styles.module.css"
-import img1 from "../../assets/Dishonored_capa.png"
-import img2 from "../../assets/TW3_Wild_Hunt.png"
-import img3 from "../../assets/Grand_Theft_Auto_V_capa.png"
-import img4 from "../../assets/red_dead.jpg"
-import img5 from "../../assets/sh.jpg"
-import img6 from "../../assets/hades.jpg"
-import img7 from "../../assets/cupHead.jpg"
+import img1 from "../../assets/JogosHighlight/Dishonored_capa.png"
+import img2 from "../../assets/JogosHighlight/TW3_Wild_Hunt.png"
+import img3 from "../../assets/JogosHighlight/Grand_Theft_Auto_V_capa.png"
+import img4 from "../../assets/JogosHighlight/red_dead.jpg"
+import img5 from "../../assets/JogosHighlight/sh.jpg"
+import img6 from "../../assets/JogosHighlight/hades.jpg"
+import img7 from "../../assets/JogosHighlight/cupHead.jpg"
 
 export default function Home() {
   const scrollToTop = (event) => {

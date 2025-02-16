@@ -1,0 +1,22 @@
+:root {
+  --main-color: #000305;
+  --second-color: #050d26;
+  --text-color: #f2eddc;
+}
+
+.gamecard {
+  background-color: #050d26;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.gamecard > img {
+  width: 120px;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.gamecard > p {
+  margin-top: 5px;
+}
