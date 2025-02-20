@@ -31,6 +31,7 @@
 .container > h2 {
   font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
+  color: var(--main-color);
 }
 
 .container > form {
@@ -44,6 +45,7 @@
   margin-bottom: 0.25rem;
   font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
+  color: var(--main-color);
 }
 
 .container > form > input {
