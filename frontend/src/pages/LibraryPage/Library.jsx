@@ -1,6 +1,8 @@
 import styles from "./styles.module.css"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import GameCard from "../../components/GameCard/GameCard"
+import NewGameModal from "../../components/NewGameModal/NewGameModal"
+import { useState } from "react"
 
 const games = [
   {id: 1, name: "Avowed", img: "avowed", rating: 3},
@@ -14,13 +16,15 @@ const games = [
 ]
 
 export default function Library() {
+  const [openModal, setOpenModal] = useState(false)
+
   return(
     <div className={styles.container}>
       <Sidebar />
       <main className={styles.content}>
         <div className={styles.header}>
           <h1>Minha Biblioteca</h1>
-          <button className={styles.newGameButton}>Novo Jogo</button>
+          <button className={styles.newGameButton} onClick={() => setOpenModal(true)}>Novo Jogo</button>
         </div>
         <div className={styles.carousel}>
           <button className={styles.prevBtn}>{"<"}</button>
@@ -32,6 +36,7 @@ export default function Library() {
           <button className={styles.nextBtn}>{">"}</button>
         </div>
       </main>
+      <NewGameModal isOpen={openModal} onClose={() => setOpenModal(false)}/>
     </div>
   )
 }
