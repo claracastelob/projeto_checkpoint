@@ -1,14 +1,18 @@
 import styles from "./styles.module.css"
 import Sidebar from "../../components/Sidebar/Sidebar"
+import NewGameModal from "../../components/NewGameModal/NewGameModal"
+import { useState } from "react"
 
 export default function Configuration() {
+  const [openModal, setOpenModal] = useState(false)
+
   return(
     <div className={styles.container}>
       <Sidebar />
       <main className={styles.content}>
         <div className={styles.header}>
           <h1>Configurations</h1>
-          <button className={styles.newGameButton}>Novo Jogo</button>
+          <button className={styles.newGameButton} onClick={() => setOpenModal(true)}>Novo Jogo</button>
         </div>
         <div className={styles.configurations}>
           <label htmlFor="username" className={styles.label}>Change Username</label>
@@ -30,6 +34,7 @@ export default function Configuration() {
           </div>
         </div>
       </main>
+      <NewGameModal isOpen={openModal} onClose={() => setOpenModal(false)}/>
     </div>
   )
 }
