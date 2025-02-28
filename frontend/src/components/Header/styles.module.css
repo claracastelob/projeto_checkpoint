@@ -34,6 +34,16 @@
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.createAccountBtn {
+  margin-right: 0.5rem;
+  padding: 0.35rem 0.35rem;
+  text-decoration: none;
+  font-size: medium;
+  color: var(--text-color);
+  font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .navLink:hover {
   color: #663add;
 }

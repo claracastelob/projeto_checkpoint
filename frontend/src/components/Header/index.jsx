@@ -1,12 +1,13 @@
 import styles from "./styles.module.css"
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <div className={styles.header}>
       <h1>Checkpoint</h1>
       <nav className={styles.nav}>
-        <a href="/createAccount" className={styles.navLink}>Create Account</a>
-        <a href="/login" className={styles.navLink}>Login</a>
+        <Link to="/createAccount" className={styles.navLink}>Criar Conta</Link>
+        <Link to="/login" className={styles.navLink}>Entrar</Link>
       </nav>
     </div>
   )

@@ -5,17 +5,17 @@ export default function CreateAccount() {
     <div>
       <div className={styles.wrapper}>
             <div className={styles.container}>
-              <h2>Create Account</h2>
+              <h2>Criar uma Conta</h2>
               <form>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Usuário</label>
                 <input type="text" id="username" required />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">E-mail</label>
                 <input type="email" id="email" required />
-                <label htmlFor="emailConfirm">Email Confirmation</label>
+                <label htmlFor="emailConfirm">Confirmação de E-mail</label>
                 <input type="email" id="emailConfirm" required />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Senha</label>
                 <input type="password" id="password" required />
-                <button>Submit</button>
+                <button>Enviar</button>
               </form>
             </div>
           </div>

@@ -11,26 +11,26 @@ export default function Configuration() {
       <Sidebar />
       <main className={styles.content}>
         <div className={styles.header}>
-          <h1>Configurations</h1>
+          <h1>Configurações</h1>
           <button className={styles.newGameButton} onClick={() => setOpenModal(true)}>Novo Jogo</button>
         </div>
         <div className={styles.configurations}>
-          <label htmlFor="username" className={styles.label}>Change Username</label>
+          <label htmlFor="username" className={styles.label}>Alterar Usuário</label>
           <div className={styles.inputContainer}>
             <input type="text" id="username" className={styles.inputs} />
-            <button className={styles.btns}>Change</button>
+            <button className={styles.btns}>Alterar</button>
           </div>
 
-          <label htmlFor="email" className={styles.label}>Change Email</label>
+          <label htmlFor="email" className={styles.label}>Alterar E-mail</label>
           <div className={styles.inputContainer}>
             <input type="text" id="email" className={styles.inputs} />
-            <button className={styles.btns}>Change</button>
+            <button className={styles.btns}>Alterar</button>
           </div>
           
-          <label htmlFor="password" className={styles.label}>Change Password</label>
+          <label htmlFor="password" className={styles.label}>Alterar Senha</label>
           <div className={styles.inputContainer}>
             <input type="text" id="password" className={styles.inputs} />
-            <button className={styles.btns}>Change</button>
+            <button className={styles.btns}>Alterar</button>
           </div>
         </div>
       </main>

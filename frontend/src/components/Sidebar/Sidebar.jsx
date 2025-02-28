@@ -1,5 +1,6 @@
 import styles from "./styles.module.css"
 import profile from "../../assets/profile.png"
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return(
@@ -8,10 +9,10 @@ export default function Sidebar() {
         <img src={profile} alt="" />
       </div>
       <nav className={styles.nav}>
-        <a href="/myLibrary" className={styles.navLink}>Minha Biblioteca</a>
-        <a href="/configurations" className={styles.navLink}>Configurações</a>
+        <Link to="/myLibrary" className={styles.navLink}>Minha Biblioteca</Link>
+        <Link to="/configurations" className={styles.navLink}>Configurações</Link>
       </nav>
-      <button className={styles.logout}>Logout</button>
+      <button className={styles.logout}>Sair</button>
     </aside>
   )
 }
