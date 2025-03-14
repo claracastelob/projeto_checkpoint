@@ -1,0 +1,24 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Clara Castelo Branco",email = "castelob.clara@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard] (>=0.115.11,<0.116.0)",
+    "alembic (>=1.15.1,<2.0.0)",
+    "sqlalchemy (>=2.0.39,<3.0.0)",
+    "pydantic-settings (>=2.8.1,<3.0.0)",
+    "mysql-connector-python (>=9.2.0,<10.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "backend", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
