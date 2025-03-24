@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from main.database import get_session
 from main.models import User
 from main.schemas import (Message, UserList, UserPublic, UserSchema)
+from main.security import get_password_hash
 
 router = APIRouter(prefix='/users', tags=['users'])
 
@@ -31,7 +32,11 @@ def create_user(user: UserSchema, session: Session = Depends(get_session)):
         detail='Email already exists'
       )
     
-  db_user = User(user=user.user, email=user.email, password=user.password)
+  db_user = User(
+    user=user.user,
+    email=user.email,
+    password=get_password_hash(user.password)
+  )
 
   session.add(db_user)
   session.commit()
@@ -51,7 +56,7 @@ def update_user(user_id:int, user: UserSchema, session: Session = Depends(get_se
   
   db_user.user = user.user
   db_user.email = user.email
-  db_user.password = user.password
+  db_user.password = get_password_hash(user.password)
 
   session.add(db_user)
   session.commit()
