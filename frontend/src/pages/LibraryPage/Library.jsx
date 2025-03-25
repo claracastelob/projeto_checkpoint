@@ -17,7 +17,6 @@ const games = [
 
 export default function Library() {
   const [openModal, setOpenModal] = useState(false)
-
   return(
     <div className={styles.container}>
       <Sidebar />
