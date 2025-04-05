@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
   const navigate = useNavigate()
 
   async function handleLogin(event) {
@@ -22,10 +23,16 @@ export default function Login() {
       });
 
       localStorage.setItem("token", response.data.access_token);
-
+      setErrorMessage("")
       window.location.href = "/myLibrary";
+
     } catch(error) {
       console.error("Erro no Login: ", error)
+      if(error.response?.status === 400) {
+        setErrorMessage("Email ou senha incorretos")
+      } else {
+        setErrorMessage("Erro ao tentar fazer login. Tente novamente mais tarde.")
+      }
     }
   }
 
@@ -34,6 +41,7 @@ export default function Login() {
       <div className={styles.container}>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           <label htmlFor="email">E-mail</label>
           <input type="email" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
           <label htmlFor="password">Senha</label>
