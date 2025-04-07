@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict, EmailStr
+from typing import Optional
 
 class Message(BaseModel):
   message: str
@@ -8,6 +9,11 @@ class UserSchema(BaseModel):
   user: str
   email: EmailStr
   password: str
+
+class UserUpdateSchema(BaseModel):
+  user: Optional[str] = None
+  email: Optional[EmailStr] = None
+  password: Optional[str] = None
 
 
 class UserPublic(BaseModel):

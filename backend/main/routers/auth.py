@@ -5,8 +5,8 @@ from sqlalchemy import select, or_
 
 from main.database import get_session
 from main.models import User
-from main.security import verify_password, create_access_token, get_password_hash
-from main.schemas import Token, UserSchema, UserPublic
+from main.security import verify_password, create_access_token, get_current_user
+from main.schemas import Token, UserPublic
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 
@@ -22,3 +22,7 @@ def login_for_access_token(
   access_token = create_access_token(data={'sub': user.email})
 
   return {'access_token': access_token, 'token_type': 'Bearer'}
+
+@router.get('/verify', response_model=UserPublic)
+def verify_user(current_user=Depends(get_current_user),session: Session = Depends(get_session)):
+  return current_user

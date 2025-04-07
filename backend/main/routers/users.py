@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from main.database import get_session
 from main.models import User
-from main.schemas import (Message, UserList, UserPublic, UserSchema)
+from main.schemas import (Message, UserList, UserPublic, UserSchema, UserUpdateSchema)
 from main.security import get_password_hash, get_current_user
 
 router = APIRouter(prefix='/users', tags=['users'])
@@ -37,16 +37,25 @@ def create_user(user: UserSchema, session: Session = Depends(get_session)):
 
 @router.put('/{user_id}', response_model=UserPublic)
 def update_user(
-  user_id:int, user: UserSchema,
+  user_id:int, user: UserUpdateSchema,
   session: Session = Depends(get_session),
   current_user=Depends(get_current_user)
 ):
   if current_user.id != user_id:
     raise HTTPException(status_code=400, detail='Not enough permission')
+  
+  if user.user is not None:
+    current_user.user = user.user
 
-  current_user.user = user.user
-  current_user.email = user.email
-  current_user.password = get_password_hash(user.password)
+  if user.email is not None:
+    current_user.email = user.email
+
+  if user.password is not None:
+    current_user.password = get_password_hash(user.password)
+
+  # current_user.user = user.user
+  # current_user.email = user.email
+  # current_user.password = get_password_hash(user.password)
 
   session.add(current_user)
   session.commit()
