@@ -77,3 +77,31 @@
 .forgotPass:hover {
   color: #2d3c69;
 }
+
+.createAccount {
+  text-decoration: none;
+  text-align: left;
+  color: #050d26;
+  margin-top: 1rem;
+}
+
+.createAccount:hover {
+  color: #2d3c69;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #1a1a1a;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #333;
+}

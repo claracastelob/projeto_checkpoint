@@ -38,6 +38,7 @@ export default function Login() {
 
   return(
     <div className={styles.wrapper}>
+      <Link to="/" className={styles.backButton}>← Início</Link>
       <div className={styles.container}>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
@@ -48,6 +49,7 @@ export default function Login() {
           <input type="password" id="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           <Link to="/passwordRecovery" className={styles.forgotPass}>Esqueci minha senha</Link>
           <button type="submit">Entrar</button>
+          <Link to="/createAccount" className={styles.createAccount}>Não tem uma conta? Crie uma aqui!</Link>
         </form>
       </div>
     </div>

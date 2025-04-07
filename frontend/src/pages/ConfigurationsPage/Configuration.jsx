@@ -14,6 +14,11 @@ export default function Configuration() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [generalError, setGeneralError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   const [confirmField, setConfirmField] = useState(null);
 
   useEffect(() => {
@@ -47,6 +52,11 @@ export default function Configuration() {
   const handleUpdate = async () => {
     const token = localStorage.getItem("token");
 
+    setUsernameError("");
+    setEmailError("");
+    setGeneralError("");
+    setSuccessMessage("");
+
     if (!userId || !confirmField) return;
 
     let payload = {};
@@ -70,13 +80,26 @@ export default function Configuration() {
         },
       });
 
-      alert(`${confirmField} alterado com sucesso!`);
       setConfirmField(null);
       setNewPassword("");
 
+      setSuccessMessage("Dados atualizados com sucesso!");
+
     } catch (error) {
-      console.error("Erro ao atualizar:", error);
-      alert("Erro ao atualizar. Verifique os dados.");
+      const detail = error.response?.data?.detail;
+      if (error.response?.status === 409) {
+        if (detail === "E-mail já cadastrado") {
+          setEmailError("Este e-mail já está em uso.");
+        } else if (detail === "Username já em uso") {
+          setUsernameError("Este nome de usuário já está em uso.");
+        } else {
+          setGeneralError("Erro de conflito: " + detail);
+        }
+      } else if (error.response?.status === 400) {
+        setGeneralError("Permissão negada.");
+      } else {
+        setGeneralError("Erro inesperado: " + detail);
+      }
     }
   };
 
@@ -88,6 +111,10 @@ export default function Configuration() {
           <h1>Configurações</h1>
         </div>
         <div className={styles.configurations}>
+          {generalError && <p className={styles.errorUpdate}>{generalError}</p>}
+          {successMessage && <p className={styles.successAlert}>{successMessage}</p>}
+          {usernameError && <p className={styles.errorUpdate}>{usernameError}</p>}
+          {emailError && <p className={styles.errorUpdate}>{emailError}</p>}
           <label htmlFor="username" className={styles.label}>Alterar Usuário</label>
           <div className={styles.inputContainer}>
             <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} className={styles.inputs} />

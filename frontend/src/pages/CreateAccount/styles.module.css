@@ -11,6 +11,7 @@
 }
 
 .wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,4 +68,21 @@
 
 .container > form > button:hover {
   background-color: #111f49;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #1a1a1a;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #333;
 }

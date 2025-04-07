@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css"
 import api from "../../services/api"
 
@@ -38,6 +39,7 @@ export default function CreateAccount() {
   return(
     <div>
       <div className={styles.wrapper}>
+      <Link to="/" className={styles.backButton}>← Início</Link>
             <div className={styles.container}>
               <h2>Criar uma Conta</h2>
               <form onSubmit={handleRegister}>
