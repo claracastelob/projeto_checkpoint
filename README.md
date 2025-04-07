@@ -6,17 +6,17 @@ Essas são algumas coisas que pude estudar e aprender até agora durante esse pr
 - Manipulação de rotas no React
 - Criação e manipulação de tabelas e banco de dados
 
-### Descrição
+## Descrição
 O checkpoint consiste em uma aplicação parecida com um "letterboxd" mas voltada para jogos, ou seja, você pode compartilhar suas experiências nas gameplays, contando o que achou do jogo, em quanto tempo finalizou, a sua nota final e etc.
 
-### Funcionalidades
+## Funcionalidades
 Principais funcionalidades da aplicação.
 
 - Cadastro e login de usuários com JWT
 - Proteção de rotas autenticadas
 - Alterações de dados por parte dos usuários
 
-### Tecnologias Utilizadas
+## Tecnologias Utilizadas
 Essas são as tecnologias/ferramentas usadas nesse projeto.
 
 **Backend**
@@ -36,7 +36,7 @@ Essas são as tecnologias/ferramentas usadas nesse projeto.
 **Banco de Dados**
 - Mysql
 
-### Próximos Passos
+## Próximos Passos
 Essa aplicação ainda está em desenvolvimento. Abaixo estão algumas das funcionalidades planejadas:  
 - [x] Melhorias visuais  
 - [ ] Implementação das rotas e banco de dados para a biblioteca de jogos dos usuários  
