@@ -4,6 +4,7 @@ import ConfigurationsModal from "./components/configurationsModal"
 import { useState } from "react"
 import { useEffect } from "react"
 import api from "../../services/api"
+import Topbar from "../../components/Topbar/index"
 
 export default function Configuration() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -105,32 +106,43 @@ export default function Configuration() {
 
   return(
     <div className={styles.container}>
-      <Sidebar />
+      <Topbar />
       <main className={styles.content}>
         <div className={styles.header}>
           <h1>Configurações</h1>
         </div>
-        <div className={styles.configurations}>
+        <div className={styles.messageWrapper}>
           {generalError && <p className={styles.errorUpdate}>{generalError}</p>}
-          {successMessage && <p className={styles.successAlert}>{successMessage}</p>}
           {usernameError && <p className={styles.errorUpdate}>{usernameError}</p>}
           {emailError && <p className={styles.errorUpdate}>{emailError}</p>}
-          <label htmlFor="username" className={styles.label}>Alterar Usuário</label>
-          <div className={styles.inputContainer}>
-            <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} className={styles.inputs} />
-            <button className={styles.btns} onClick={() => {setConfirmField("username"); setOpenModal(true)}}>Alterar</button>
+          {successMessage && <p className={styles.successAlert}>{successMessage}</p>}
+        </div>
+        <div className={styles.configurations}>
+          <div className={styles.configSection}>
+            <h2>Username</h2>
+            <label htmlFor="username" className={styles.label}>Alterar Usuário</label>
+            <div className={styles.inputContainer}>
+              <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} className={styles.inputs} />
+              <button className={styles.btns} onClick={() => {setConfirmField("username"); setOpenModal(true)}}>Alterar</button>
+            </div>
           </div>
 
-          <label htmlFor="email" className={styles.label}>Alterar E-mail</label>
-          <div className={styles.inputContainer}>
-            <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} className={styles.inputs} />
-            <button className={styles.btns} onClick={() => {setConfirmField("email"); setOpenModal(true)}}>Alterar</button>
+          <div className={styles.configSection}>
+            <h2>E-mail</h2>
+            <label htmlFor="email" className={styles.label}>Alterar E-mail</label>
+            <div className={styles.inputContainer}>
+              <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} className={styles.inputs} />
+              <button className={styles.btns} onClick={() => {setConfirmField("email"); setOpenModal(true)}}>Alterar</button>
+            </div>
           </div>
           
-          <label htmlFor="password" className={styles.label}>Alterar Senha</label>
-          <div className={styles.inputContainer}>
-            <input type="password" id="password" onChange={(e) => setNewPassword(e.target.value)} className={styles.inputs} />
-            <button className={styles.btns} onClick={() => {setConfirmField("newPassword"); setOpenModal(true)}}>Alterar</button>
+          <div className={styles.configSection}>
+            <h2>Senha</h2>
+            <label htmlFor="password" className={styles.label}>Alterar Senha</label>
+            <div className={styles.inputContainer}>
+              <input type="password" id="password" onChange={(e) => setNewPassword(e.target.value)} className={styles.inputs} />
+              <button className={styles.btns} onClick={() => {setConfirmField("newPassword"); setOpenModal(true)}}>Alterar</button>
+            </div>
           </div>
         </div>
       </main>

@@ -1,57 +1,49 @@
-body {
-  background-color: #050d26;
+ body {
+  /* background-color: #050d26; */
   color: #f2eddc;
   font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+} 
 
 .container {
+  background-color: #010718;
   display: flex;
+  flex-direction: column;
   height: 100vh;
+  min-height: 100vh;
 }
 
 .content {
-  flex-grow: 1;
-  padding: 4rem;
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .gameGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  margin-top: 20px;
-  padding-right: 5rem;
-  padding-left: 5rem;
-}
-
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.prevBtn, .nextBtn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #f2eddc;
-  cursor: pointer;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));;
+  gap: 24px;
+  justify-items: center;
 }
 
 .newGameButton {
-  background-color: #663add;
-  color: #f2eddc;
+  background-color: #000305;
+  color: white;
+  padding: 0.6rem 1.2rem;
   border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 0.8rem;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .newGameButton:hover {
-  background-color: #421aaf;
+  background-color: #1e016d;
 }

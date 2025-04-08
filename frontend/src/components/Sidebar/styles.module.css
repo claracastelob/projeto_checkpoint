@@ -6,7 +6,7 @@
 
 .sidebar {
   width: 250px;
-  background-color: var(--second-color);
+  background-color: #010718;
   padding: 4rem;
   display: flex;
   flex-direction: column;

@@ -25,9 +25,7 @@ export default function GameCard({name, img, rating}) {
       <img src={images[name]} alt="" />
       <p>{name}</p>
       <p>Tempo de Conclusão: </p>
-      <div className={styles.stars}>
-        {"★".repeat(rating)}{"☆".repeat(5 - rating)}
-      </div>
+      <p className={styles.rating}>Nota: <span>{rating.toFixed(1)}</span></p>
     </div>
   )
 }

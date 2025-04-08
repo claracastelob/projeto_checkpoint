@@ -9,10 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.2s ease;
 }
 
 .container {
-  background-color: #28155c;
+  background-color: #1b0d42;
   width: 400px;
   height: 450px;
   max-width: 90%;

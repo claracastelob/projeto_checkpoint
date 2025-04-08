@@ -3,6 +3,7 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import GameCard from "../../components/GameCard/GameCard"
 import NewGameModal from "../../components/NewGameModal/NewGameModal"
 import { useState } from "react"
+import Topbar from "../../components/Topbar/index"
 
 const games = [
   {id: 1, name: "Avowed", img: "avowed", rating: 3},
@@ -19,20 +20,17 @@ export default function Library() {
   const [openModal, setOpenModal] = useState(false)
   return(
     <div className={styles.container}>
-      <Sidebar />
+      <Topbar />
       <main className={styles.content}>
         <div className={styles.header}>
           <h1>Minha Biblioteca</h1>
-          <button className={styles.newGameButton} onClick={() => setOpenModal(true)}>Novo Jogo</button>
+          <button className={styles.newGameButton} onClick={() => setOpenModal(true)}>+ Novo Jogo</button>
         </div>
-        <div className={styles.carousel}>
-          <button className={styles.prevBtn}>{"<"}</button>
-          <div className={styles.gameGrid}>
-            {games.map((game) => (
-              <GameCard key={game.id} {...game}/>
-            ))}
-          </div>
-          <button className={styles.nextBtn}>{">"}</button>
+
+        <div className={styles.gameGrid}>
+          {games.map((game) => (
+            <GameCard key={game.id} {...game}/>
+          ))}
         </div>
       </main>
       <NewGameModal isOpen={openModal} onClose={() => setOpenModal(false)}/>

@@ -5,18 +5,33 @@
 }
 
 .gamecard {
-  background-color: #050d26;
-  border-radius: 10px;
-  padding: 10px;
+  background-color: #000305;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px -10px var(--main-color);
   text-align: center;
+  width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gamecard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px -9px rgba(0,0,0,0.4);
 }
 
 .gamecard > img {
-  width: 120px;
-  height: 150px;
-  border-radius: 10px;
+  width: 100%;
+  height: 240px; 
+  object-fit: cover;
+  border-radius: 0.5rem;
 }
 
 .gamecard > p {
   margin-top: 5px;
+  font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.rating {
+  font-weight: 600;
+  color: #460b8a;
 }
