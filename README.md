@@ -39,7 +39,8 @@ Essas são as tecnologias/ferramentas usadas nesse projeto.
 ## Próximos Passos
 Essa aplicação ainda está em desenvolvimento. Abaixo estão algumas das funcionalidades planejadas:  
 - [x] Melhorias visuais  
-- [ ] Implementação das rotas e banco de dados para a biblioteca de jogos dos usuários  
-- [ ] Integração com uma API externa para fornecer informações sobre os jogos
+- [X] Implementação das rotas e banco de dados para a biblioteca de jogos dos usuários  
+- [X] Integração com uma API externa para fornecer informações sobre os jogos
 - [ ] Dockerização completa do projeto  
+- [ ] Funcionalidade de alteração da foto do perfil do usuário
 - [ ] Funcionalidade de envio de e-mails (recuperação de senha, confirmação de cadastro)  

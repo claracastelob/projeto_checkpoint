@@ -2,12 +2,13 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from main.routers import users, auth
+from main.routers import users, auth, games
 from main.schemas import Message
 
 app = FastAPI()
 app.include_router(users.router)
 app.include_router(auth.router)
+app.include_router(games.router)
 
 origins = [
     'http://localhost:3000',

@@ -30,3 +30,26 @@ class UserList(BaseModel):
 class Token(BaseModel):
   access_token: str
   token_type: str
+
+class AddGameRequest(BaseModel):
+  rawg_id: int
+  name: str
+  image_url: str
+  platform: str
+  genre: str
+  description: str
+  experience: str
+  completion_time: str
+  recommended: bool
+  rating: int
+
+class GameRead(BaseModel):
+  id: int
+  name: str
+  image_url: str
+  platform: str
+  genre: str
+  description: str
+
+  class Config:
+    orm_mode = True
