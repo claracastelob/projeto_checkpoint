@@ -10,6 +10,7 @@ class User:
   user: Mapped[str] = mapped_column(String(100), unique=True)
   email: Mapped[str] = mapped_column(String(255), unique=True)
   password: Mapped[str] = mapped_column(String(255))
+  avatar_url: Mapped[str] = mapped_column(String(255), nullable=True, default="/static/avatars/default.png")
 
   user_games: Mapped[list["UserGame"]] = relationship(back_populates="user", cascade="all, delete-orphan", init=False, default_factory=list)
 

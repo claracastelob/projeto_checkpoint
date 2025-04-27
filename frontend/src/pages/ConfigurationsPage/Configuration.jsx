@@ -1,18 +1,13 @@
 import styles from "./styles.module.css"
-import Sidebar from "../../components/Sidebar/Sidebar"
-import ConfigurationsModal from "./components/configurationsModal"
 import { useState } from "react"
 import { useEffect } from "react"
 import api from "../../services/api"
 import Topbar from "../../components/Topbar/index"
 
 export default function Configuration() {
-  const [dataLoaded, setDataLoaded] = useState(false);
-  const [openModal, setOpenModal] = useState(false)
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const [usernameError, setUsernameError] = useState("");
@@ -20,74 +15,95 @@ export default function Configuration() {
   const [generalError, setGeneralError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const [confirmField, setConfirmField] = useState(null);
-
   useEffect(() => {
     async function fetchUserData() {
       const token = localStorage.getItem("token");
-
+  
+      if (!token) {
+        console.error("Token não encontrado.");
+        return;
+      }
+  
       try {
         const response = await api.get("/auth/verify", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         const { id, user, email } = response.data;
         setUserId(id);
-
-        setTimeout(() => {
-          setUsername(user);
-          setEmail(email);
-          setDataLoaded(true);
-        }, 500);
+        setUsername(user);
+        setEmail(email);
+        setDataLoaded(true);
 
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
       }
     }
-
+  
     fetchUserData();
+    return () => {
+      setUserId(null);
+      setUsername(""); 
+      setEmail("");
+    };
   }, []);
 
-  const handleUpdate = async () => {
-    const token = localStorage.getItem("token");
-
+  const handleUpdate = async (field) => {
+    
     setUsernameError("");
     setEmailError("");
     setGeneralError("");
     setSuccessMessage("");
-
-    if (!userId || !confirmField) return;
-
+    
+    if (!userId || !field) {
+      return;
+    }
+    
     let payload = {};
-
-    if (confirmField === "username") {
+  
+    if (field === "username" && username.trim() !== "") {
       payload.user = username.trim();
     }
   
-    if (confirmField === "email") {
+    if (field === "email" && email.trim() !== "") {
       payload.email = email.trim();
     }
   
-    if (confirmField === "newPassword" && newPassword.trim() !== "") {
+    if (field === "newPassword" && newPassword.trim() !== "") {
       payload.password = newPassword.trim();
     }
-
+  
+    if (Object.keys(payload).length === 0) {
+      console.log("Nenhum dado para atualizar.");
+      return;
+    }
+  
     try {
-      await api.put(`/users/${userId}`, payload, {
+      const token = localStorage.getItem("token");
+  
+      const response = await api.put(`/users/${userId}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setConfirmField(null);
+      
       setNewPassword("");
-
       setSuccessMessage("Dados atualizados com sucesso!");
+
+      if (field === "username") {
+        setUsername(username.trim());
+      }
 
     } catch (error) {
       const detail = error.response?.data?.detail;
+      console.error("Erro ao atualizar: ", error.response);
+  
       if (error.response?.status === 409) {
         if (detail === "E-mail já cadastrado") {
           setEmailError("Este e-mail já está em uso.");
@@ -123,7 +139,7 @@ export default function Configuration() {
             <label htmlFor="username" className={styles.label}>Alterar Usuário</label>
             <div className={styles.inputContainer}>
               <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} className={styles.inputs} />
-              <button className={styles.btns} onClick={() => {setConfirmField("username"); setOpenModal(true)}}>Alterar</button>
+              <button className={styles.btns} onClick={() => handleUpdate("username")}>Alterar</button>
             </div>
           </div>
 
@@ -132,7 +148,7 @@ export default function Configuration() {
             <label htmlFor="email" className={styles.label}>Alterar E-mail</label>
             <div className={styles.inputContainer}>
               <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} className={styles.inputs} />
-              <button className={styles.btns} onClick={() => {setConfirmField("email"); setOpenModal(true)}}>Alterar</button>
+              <button className={styles.btns} onClick={() => handleUpdate("email")}>Alterar</button>
             </div>
           </div>
           
@@ -141,20 +157,10 @@ export default function Configuration() {
             <label htmlFor="password" className={styles.label}>Alterar Senha</label>
             <div className={styles.inputContainer}>
               <input type="password" id="password" onChange={(e) => setNewPassword(e.target.value)} className={styles.inputs} />
-              <button className={styles.btns} onClick={() => {setConfirmField("newPassword"); setOpenModal(true)}}>Alterar</button>
+              <button className={styles.btns} onClick={() => handleUpdate("newPassword")}>Alterar</button>
             </div>
           </div>
         </div>
       </main>
-    {openModal && confirmField && (
-      <ConfigurationsModal
-        isOpen={openModal}
-        onClose={() => {
-        setOpenModal(false);
-        setConfirmField(null);
-      }}
-      onConfirm={handleUpdate}
-    />
-  )}
   </div>
 )}

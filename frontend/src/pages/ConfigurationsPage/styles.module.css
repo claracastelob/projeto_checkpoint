@@ -79,7 +79,8 @@ body {
 }
 
 .messageWrapper {
-  margin-bottom: 1rem;
+  /* margin-bottom: 0.75rem; */
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

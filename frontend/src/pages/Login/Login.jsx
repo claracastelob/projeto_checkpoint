@@ -1,14 +1,14 @@
 import styles from "./styles.module.css"
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import api from "../../services/api"
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api"
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-  const navigate = useNavigate()
 
   async function handleLogin(event) {
     event.preventDefault()
@@ -24,7 +24,7 @@ export default function Login() {
 
       localStorage.setItem("token", response.data.access_token);
       setErrorMessage("")
-      window.location.href = "/myLibrary";
+      navigate("/myLibrary");
 
     } catch(error) {
       console.error("Erro no Login: ", error)
@@ -47,7 +47,7 @@ export default function Login() {
           <input type="email" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
           <label htmlFor="password">Senha</label>
           <input type="password" id="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-          <Link to="/passwordRecovery" className={styles.forgotPass}>Esqueci minha senha</Link>
+          {/* <Link to="/passwordRecovery" className={styles.forgotPass}>Esqueci minha senha</Link> */}
           <button type="submit">Entrar</button>
           <Link to="/createAccount" className={styles.createAccount}>Não tem uma conta? Crie uma aqui!</Link>
         </form>

@@ -53,3 +53,14 @@ class GameRead(BaseModel):
 
   class Config:
     orm_mode = True
+
+class UserGameRead(BaseModel):
+  id: int
+  experience: Optional[str]
+  completion_time: Optional[str]
+  recommended: bool
+  rating: int
+  game: GameRead
+
+  class Config:
+    orm_mode = True

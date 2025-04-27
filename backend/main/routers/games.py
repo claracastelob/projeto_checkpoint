@@ -6,7 +6,7 @@ import httpx
 from main.models import Game, UserGame
 from main.database import get_session
 from main.settings import Settings
-from main.schemas import AddGameRequest, GameRead
+from main.schemas import AddGameRequest, GameRead, UserGameRead
 from main.security import get_current_user
 
 router = APIRouter(prefix='/games', tags=['games'])
@@ -58,3 +58,47 @@ async def add_game_to_library(
     session.commit()
 
     return new_game
+
+@router.get("/", response_model=list[UserGameRead])
+async def get_user_games(
+    session: AsyncSession = Depends(get_session),
+    user=Depends(get_current_user)
+):
+    result = session.execute(
+        select(UserGame).join(Game).where(UserGame.user_id == user.id)
+    )
+    user_games = result.scalars().all()
+    return user_games
+
+@router.get("/{user_game_id}", response_model=UserGameRead)
+async def get_game_details(
+    user_game_id: int,
+    session: AsyncSession = Depends(get_session),
+    user=Depends(get_current_user)
+):
+    result = await session.execute(
+        select(UserGame).where(UserGame.id == user_game_id, UserGame.user_id == user.id).join(Game)
+    )
+    user_game = result.scalar_one_or_none()
+    if not user_game:
+        raise HTTPException(status_code=404, detail="Jogo não encontrado na sua biblioteca")
+
+    return user_game
+
+@router.delete("/{user_game_id}", status_code=204)
+async def delete_game_from_library(
+    user_game_id: int,
+    session: AsyncSession = Depends(get_session),
+    user=Depends(get_current_user)
+):
+    result = session.execute(
+        select(UserGame).where(UserGame.id == user_game_id, UserGame.user_id == user.id)
+    )
+    user_game = result.scalar_one_or_none()
+
+    if not user_game:
+        raise HTTPException(status_code=404, detail="Jogo não encontrado na sua biblioteca")
+
+    session.delete(user_game)
+    session.commit()
+    return

@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import profile from "../../assets/profile.png";
+import profile from "../../assets/default.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Topbar() {

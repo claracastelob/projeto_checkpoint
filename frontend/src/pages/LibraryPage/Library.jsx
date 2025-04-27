@@ -1,24 +1,56 @@
 import styles from "./styles.module.css"
-import Sidebar from "../../components/Sidebar/Sidebar"
 import GameCard from "../../components/GameCard/GameCard"
 import NewGameModal from "../../components/NewGameModal/NewGameModal"
-import { useState } from "react"
 import Topbar from "../../components/Topbar/index"
-
-const games = [
-  {id: 1, name: "Avowed", img: "avowed", rating: 3},
-  {id: 2, name: "Civilization VI", img: "civi", rating: 5},
-  {id: 3, name: "Crash Bandicoot", img: "imagem", rating: 5},
-  {id: 4, name: "Dishonored 2", img: "imagem", rating: 4},
-  {id: 5, name: "Far Cry 3", img: "imagem", rating: 4},
-  {id: 6, name: "GTA IV", img: "imagem", rating: 4},
-  {id: 7, name: "The Sims 2", img: "imagem", rating: 3},
-  {id: 8, name: "Zelda: Ocarina of Time", img: "imagem", rating: 4},
-]
+import GameDetailsModal from "../../components/GameDetailsModal/index"
+import api from "../../services/api"
+import { useState, useEffect } from "react"
 
 export default function Library() {
   const [openModal, setOpenModal] = useState(false)
-  return(
+  const [showDetails, setShowDetails] = useState(false)
+  const [selectedGame, setSelectedGame] = useState(null)
+  const [games, setGames] = useState([])
+
+  const fetchGames = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await api.get("/games", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setGames(response.data)
+    } catch (err) {
+      console.error("Erro ao buscar jogos:", err)
+    }
+  }
+
+  const handleCardClick = (userGame) => {
+    setSelectedGame(userGame)
+    setShowDetails(true)
+  }
+
+  useEffect(() => {
+    fetchGames()
+  }, [])
+
+  const handleDeleteGame = async (id) => {
+    try {
+      const token = localStorage.getItem("token")
+      await api.delete(`/games/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      fetchGames()
+      setShowDetails(false)
+    } catch (err) {
+      console.error("Erro ao excluir jogo:", err)
+    }
+  }
+
+  return (
     <div className={styles.container}>
       <Topbar />
       <main className={styles.content}>
@@ -28,12 +60,27 @@ export default function Library() {
         </div>
 
         <div className={styles.gameGrid}>
-          {games.map((game) => (
-            <GameCard key={game.id} {...game}/>
+          {games.map((userGame) => (
+            <GameCard
+              key={userGame.id}
+              name={userGame.game.name}
+              image_url={userGame.game.image_url}
+              rating={userGame.rating}
+              recommended={userGame.recommended}
+              onClick={() => handleCardClick(userGame)}
+            />
           ))}
         </div>
       </main>
-      <NewGameModal isOpen={openModal} onClose={() => setOpenModal(false)}/>
+
+      <NewGameModal isOpen={openModal} onClose={() => setOpenModal(false)} onAddGame={fetchGames} />
+      {showDetails && (
+        <GameDetailsModal
+          game={selectedGame}
+          onClose={() => setShowDetails(false)}
+          onDelete={() => handleDeleteGame(selectedGame.id)}
+        />
+      )}
     </div>
   )
 }

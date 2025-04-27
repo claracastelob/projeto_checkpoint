@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./styles.module.css";
 import api from "../../services/api";
 
-export default function NewGameModal({ isOpen, onClose }) {
+export default function NewGameModal({ isOpen, onClose, onAddGame }) {
   const inputRef = useRef(null);
   const suggestionRef = useRef(null);
   const [name, setName] = useState("");
@@ -102,6 +102,9 @@ export default function NewGameModal({ isOpen, onClose }) {
       alert("Jogo adicionado com sucesso!");
       resetForm();
       onClose();
+      if (typeof onAddGame === "function") {
+        onAddGame();
+      }
 
     } catch (error) {
       console.error("Erro ao adicionar jogo:", error);
@@ -187,7 +190,7 @@ export default function NewGameModal({ isOpen, onClose }) {
                 checked={recommended}
                 onChange={(e) => setRecommended(e.target.checked)}
               />
-              Você recomendaria este jogo?
+              Eu recomendo este jogo!
             </label>
           </div>
 

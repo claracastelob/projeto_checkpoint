@@ -15,6 +15,7 @@ Principais funcionalidades da aplicação.
 - Cadastro e login de usuários com JWT
 - Proteção de rotas autenticadas
 - Alterações de dados por parte dos usuários
+- Uso de uma API externa para construção da biblioteca de jogos
 
 ## Tecnologias Utilizadas
 Essas são as tecnologias/ferramentas usadas nesse projeto.
@@ -36,11 +37,18 @@ Essas são as tecnologias/ferramentas usadas nesse projeto.
 **Banco de Dados**
 - Mysql
 
+## Versões necessárias
+Listagem da versão das principais ferramentas utilizadas no projeto.  
+- Docker: 26.1.3
+- Python: 3.12.3
+- Node.js: 20.9.0
+- Mysql: 8.0.41
+
+
 ## Próximos Passos
 Essa aplicação ainda está em desenvolvimento. Abaixo estão algumas das funcionalidades planejadas:  
 - [x] Melhorias visuais  
 - [X] Implementação das rotas e banco de dados para a biblioteca de jogos dos usuários  
 - [X] Integração com uma API externa para fornecer informações sobre os jogos
-- [ ] Dockerização completa do projeto  
-- [ ] Funcionalidade de alteração da foto do perfil do usuário
-- [ ] Funcionalidade de envio de e-mails (recuperação de senha, confirmação de cadastro)  
+- [X] Dockerização completa do projeto  
+- [ ] Funcionalidade de envio de e-mails (recuperação de senha, confirmação de cadastro) [_POSTERIORMENTE_]
