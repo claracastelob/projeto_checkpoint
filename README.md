@@ -43,7 +43,52 @@ Listagem da versão das principais ferramentas utilizadas no projeto.
 - Python: 3.12.3
 - Node.js: 20.9.0
 - Mysql: 8.0.41
+- Poetry: 2.1.1
 
+## Configurações do projeto
+Essa aplicação possui dois arquivos `.env` que precisam ser configurados antes de iniciá-lo. Um está localizado dentro da pasta `/backend` e o outro fica na raiz do projeto. 
+
+**Backend**  
+Configure o arquivo com as seguintes variáveis:
+
+| Variáveis     | Observação    |
+|-------------|--------------|
+| DATABASE_URL="mysql+mysqlconnector://user:senha@nome_serviço_db:porta/nome_database"   | "nome_serviço_db" é o nome do serviço do db no docker-compose.    |
+| SECRET_KEY = 'sua-chave-secreta'    | Gere sua própria chave com o algoritmo listado abaixo.    |
+| ALGORITHM = 'HS256'   | ---     |
+| ACCESS_TOKEN_EXPIRE_MINUTES = tempo_expiração_do_token      | Tempo em minutos (Ex: 20, 30, 40)     |
+| RAWG_API_KEY = "chave-api"    | Essa aplicação usa a API da RAWG para buscar as informações dos jogos. É necessário que você crie uma conta gratuitamente no site deles para gerar uma API KEY. Depois, só inserir nesse campo.     |
+
+Acesse o [site da RAWG](https://rawg.io/) para gerar sua chave da API.  
+
+**Raiz do projeto**  
+Nesse arquivo você precisa configurar as variáveis de ambiente do MySQL e a URL do Vite para comunicação no Docker com o Backend da aplicação:
+
+| Variáveis    | Observações     |
+|-------------|--------------|
+| DATABASE_URL="mysql+mysqlconnector://user:senha@nome_serviço_db:porta/nome_database"     | Mesma configurada no arquivo anterior.      |
+| MYSQL_ROOT_PASSWORD='senha_do_root'     | Aqui você insere uma senha Root.      |
+| MYSQL_DATABASE='nome_database'     | Nome do banco de dados      |
+| MYSQL_USER='usuario'     | Usuário do MySQL      |
+| MYSQL_PASSWORD='senha_usuario'     | Senha do usuário MySQL      |
+| VITE_API_URL="http://backend:8000" | Aqui você vai colocar o nome do serviço do seu backend que foi cadastrado no docker-compose. No meu caso ele chama "backend" e atua na porta 8000 (Se você mudar, precisa alterar aqui também)  |
+
+## Como rodar a aplicação
+Após realizar o clone do projeto, basta seguir os passos abaixo:  
+1. Instalar dependências do Frontend  
+`npm install`  
+2. Instalar dependências do Backend  
+`poetry shell`  
+`poetry install`  
+3. Configurar os arquivos `.env`  
+4. Fazer o build das imagens e rodar o projeto  
+`docker compose up --build`
+
+**Observações**  
+- Caso seja necessário, use `poetry lock` para atualizar o arquivo `poetry.lock`, depois repita o processo de instalação das dependências.  
+- Quando subir os containers, acesse o do backend e rode as migrações com o Alembic para que seja gerado o banco de dados corretamente: `alembic upgrade head`.  
+- A versão 2.1.1 do poetry não vem mais com o shell embutido, ele foi substituído por outro comando, o `env activate` [(Acesse aqui a documentação do Poetry)](https://python-poetry.org/docs/cli/#env). Caso opte por usar o comando antigo com shell você precisará instalar um plugin do poetry, as instruções estão nesse [link](https://github.com/python-poetry/poetry-plugin-shell).
+- Não esqueça de fornecer as permissões corretas ao seu usuário MySQL.
 
 ## Próximos Passos
 Essa aplicação ainda está em desenvolvimento. Abaixo estão algumas das funcionalidades planejadas:  
@@ -51,4 +96,4 @@ Essa aplicação ainda está em desenvolvimento. Abaixo estão algumas das funci
 - [X] Implementação das rotas e banco de dados para a biblioteca de jogos dos usuários  
 - [X] Integração com uma API externa para fornecer informações sobre os jogos
 - [X] Dockerização completa do projeto  
-- [ ] Funcionalidade de envio de e-mails (recuperação de senha, confirmação de cadastro) [_POSTERIORMENTE_]
+- [ ] Funcionalidade de envio de e-mails (recuperação de senha, confirmação de cadastro) **[_POSTERIORMENTE_]**
