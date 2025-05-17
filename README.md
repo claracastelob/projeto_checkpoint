@@ -68,26 +68,19 @@ Nesse arquivo você precisa configurar as variáveis de ambiente do MySQL e a UR
 |-------------|--------------|
 | DATABASE_URL="mysql+mysqlconnector://user:senha@nome_serviço_db:porta/nome_database"     | Mesma configurada no arquivo anterior.      |
 | MYSQL_ROOT_PASSWORD='senha_do_root'     | Aqui você insere uma senha Root.      |
-| MYSQL_DATABASE='nome_database'     | Nome do banco de dados      |
+| MYSQL_DATABASE='nome_database'     | Nome do banco de dados, o mesmo da URL.      |
 | MYSQL_USER='usuario'     | Usuário do MySQL      |
 | MYSQL_PASSWORD='senha_usuario'     | Senha do usuário MySQL      |
 | VITE_API_URL="http://backend:8000" | Aqui você vai colocar o nome do serviço do seu backend que foi cadastrado no docker-compose. No meu caso ele chama "backend" e atua na porta 8000 (Se você mudar, precisa alterar aqui também)  |
 
 ## Como rodar a aplicação
-Após realizar o clone do projeto, basta seguir os passos abaixo:  
-1. Instalar dependências do Frontend  
-`npm install`  
-2. Instalar dependências do Backend  
-`poetry shell`  
-`poetry install`  
-3. Configurar os arquivos `.env`  
-4. Fazer o build das imagens e rodar o projeto  
-`docker compose up --build`
+Como o projeto está totalmente dockerizado, após realizar o clone do repositório, basta configurar os arquivos `.env` e fazer o build dos containers.  
+```
+docker compose up --build
+```
 
-**Observações**  
-- Caso seja necessário, use `poetry lock` para atualizar o arquivo `poetry.lock`, depois repita o processo de instalação das dependências.  
-- Quando subir os containers, acesse o do backend e rode as migrações com o Alembic para que seja gerado o banco de dados corretamente: `alembic upgrade head`.  
-- A versão 2.1.1 do poetry não vem mais com o shell embutido, ele foi substituído por outro comando, o `env activate` [(Acesse aqui a documentação do Poetry)](https://python-poetry.org/docs/cli/#env). Caso opte por usar o comando antigo com shell você precisará instalar um plugin do poetry, as instruções estão nesse [link](https://github.com/python-poetry/poetry-plugin-shell).
+**Observações**   
+- Caso necessário, quando subir os containers, acesse o do backend e rode as migrações com o Alembic para que seja gerado o banco de dados corretamente: `alembic upgrade head`.  
 - Não esqueça de fornecer as permissões corretas ao seu usuário MySQL.
 
 ## Próximos Passos
